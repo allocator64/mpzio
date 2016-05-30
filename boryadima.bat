@@ -8,7 +8,6 @@
 	(slot value (default none))
 )
 
-;;Define the question template with validation constaints slots
 (deftemplate question
 	(slot question-id (default none))
 	(slot question-to-ask (default none))
@@ -16,14 +15,13 @@
 	(multislot choices (default yes no))
 )
 
-;; ask-question with validation
 (deftemplate proglang
 	(multislot if)
 	(slot name)
 	(slot description (default ""))
 )
 
-(defrule remove-proglang-good-condition
+(defrule update-proglangs
 	?r <- (proglang
 					(if  ?first-ask-if is ?val $?rest-of-ifs-true)
 				)
@@ -49,7 +47,6 @@
 		(printout t ?name crlf ?description crlf)
 )
 
-;ask
 (deffunction ask
 	(?question ?choices)
 	(printout t ?question " " ?choices " : ")
@@ -68,14 +65,10 @@
 
 (deftemplate question-rule
 	(multislot if (default none))
-	(slot then-ask-question (default none))
+	(slot then (default none))
 )
 
-
-
-;Implementing the question dependency rules
-
-(defrule remove-condition-from-question-rules
+(defrule update-question-rules
 	?r <- (question-rule
 					(if  ?first-ask-if is ?val $?rest-of-ifs-true)
 				)
@@ -91,16 +84,14 @@
 		)
 )
 
-(defrule set-pre-condition-when-no-antecedents
-	?r <- (question-rule (if $?a&:(=(length$ ?a) 0))  (then-ask-question ?f))
+(defrule update-questions
+	?r <- (question-rule (if $?a&:(=(length$ ?a) 0))  (then ?f))
 	?q <- (question  (question-id ?f) (is-hidden yes) )
 		(not (answer (question-id ?f)))
 	=>
 		(modify ?q (is-hidden no))
 )
 
-
-; ask-question
 (defrule ask-question
 	?q <- (question (question-to-ask ?question)
 					(question-id ?question-id)
@@ -115,7 +106,6 @@
 )
 
 
-;============= PURPOSE =============
 (assert
 	(question
 		(question-id purpose)
@@ -125,7 +115,6 @@
 	)
 )
 
-;============= DESKTOP TYPE =============
 (assert
 	(question
 		(question-id desktop-type)
@@ -137,11 +126,10 @@
 (assert
 	(question-rule
 		(if purpose is desktop)
-		(then-ask-question desktop-type)
+		(then desktop-type)
 	)
 )
 
-;============= MOBILE PLATFORM =============
 (assert
 	(question
 		(question-id mobile-platform)
@@ -153,11 +141,10 @@
 (assert
 	(question-rule
 		(if purpose is mobile)
-		(then-ask-question mobile-platform)
+		(then mobile-platform)
 	)
 )
 
-;============= DESKTOP PLATFORM =============
 (assert
 	(question
 		(question-id desktop-platform)
@@ -169,18 +156,17 @@
 (assert
 	(question-rule
 		(if purpose is desktop and desktop-type is game)
-		(then-ask-question desktop-platform)
+		(then desktop-platform)
 	)
 )
 
 (assert
 	(question-rule
 		(if purpose is desktop and desktop-type is graphics and crossplatform is no)
-		(then-ask-question desktop-platform)
+		(then desktop-platform)
 	)
 )
 
-;============= SHOW OFF =============
 (assert
 	(question
 		(question-id show-off)
@@ -191,18 +177,17 @@
 (assert
 	(question-rule
 		(if purpose is mobile and mobile-platform is ios)
-		(then-ask-question show-off)
+		(then show-off)
 	)
 )
 
 (assert
 	(question-rule
 		(if purpose is self-development and difficulty is hard)
-		(then-ask-question show-off)
+		(then show-off)
 	)
 )
 
-;============= WEB SPECIALIZATION =============
 (assert
 	(question
 		(question-id web-specialization)
@@ -214,11 +199,10 @@
 (assert
 	(question-rule
 		(if purpose is web)
-		(then-ask-question web-specialization)
+		(then web-specialization)
 	)
 )
 
-;============= WEB OLDSCOOL =============
 (assert
 	(question
 		(question-id web-oldscool)
@@ -229,11 +213,10 @@
 (assert
 	(question-rule
 		(if purpose is web and web-specialization is frontend)
-		(then-ask-question web-oldscool)
+		(then web-oldscool)
 	)
 )
 
-;============= CROSSPLATFORM =============
 (assert
 	(question
 		(question-id crossplatform)
@@ -244,11 +227,10 @@
 (assert
 	(question-rule
 		(if purpose is graphics)
-		(then-ask-question crossplatform)
+		(then crossplatform)
 	)
 )
 
-;============= HIGHLOAD =============
 (assert
 	(question
 		(question-id highload)
@@ -259,11 +241,10 @@
 (assert
 	(question-rule
 		(if purpose is web and web-specialization is backend)
-		(then-ask-question highload)
+		(then highload)
 	)
 )
 
-;============= is-web =============
 (assert
 	(question
 		(question-id is-web)
@@ -274,11 +255,10 @@
 (assert
 	(question-rule
 		(if purpose is self-development and difficulty is medium)
-		(then-ask-question is-web)
+		(then is-web)
 	)
 )
 
-;============= is-functional =============
 (assert
 	(question
 		(question-id is-functional)
@@ -289,11 +269,10 @@
 (assert
 	(question-rule
 		(if purpose is self-development and difficulty is hard)
-		(then-ask-question is-functional)
+		(then is-functional)
 	)
 )
 
-;============= DIFFICULTY =============
 (assert
 	(question
 		(question-id difficulty)
@@ -305,46 +284,45 @@
 (assert
 	(question-rule
 		(if purpose is graphics and crossplatform is yes)
-		(then-ask-question difficulty)
+		(then difficulty)
 	)
 )
 
 (assert
 	(question-rule
 		(if purpose is graphics and crossplatform is no and desktop-platform is osx)
-		(then-ask-question difficulty)
+		(then difficulty)
 	)
 )
 
 (assert
 	(question-rule
 		(if purpose is graphics and crossplatform is no and desktop-platform is linux)
-		(then-ask-question difficulty)
+		(then difficulty)
 	)
 )
 
 (assert
 	(question-rule
 		(if purpose is web and web-specialization is backend and highload is no)
-		(then-ask-question difficulty)
+		(then difficulty)
 	)
 )
 
 (assert
 	(question-rule
 		(if purpose is desktop and desktop-type is science and science-type is computation)
-		(then-ask-question difficulty)
+		(then difficulty)
 	)
 )
 
 (assert
 	(question-rule
 		(if purpose is self-development)
-		(then-ask-question difficulty)
+		(then difficulty)
 	)
 )
 
-;============= SCIENCE TYPE =============
 (assert
 	(question
 		(question-id science-type)
@@ -356,11 +334,10 @@
 (assert
 	(question-rule
 		(if purpose is desktop and desktop-type is science)
-		(then-ask-question science-type)
+		(then science-type)
 	)
 )
 
-;============= AI TYPE =============
 (assert
 	(question
 		(question-id ai-type)
@@ -372,12 +349,11 @@
 (assert
 	(question-rule
 		(if purpose is desktop and desktop-type is science and science-type is AI)
-		(then-ask-question ai-type)
+		(then ai-type)
 	)
 )
 
 
-;============= PROGRAM LANGS ============
 (assert
 	(proglang
 		(if purpose is mobile and mobile-platform is android)
