@@ -4,7 +4,7 @@
 ; набрать (run)
 
 (deftemplate answer
-	(slot id  (default none))
+	(slot id (default none))
 	(slot value (default none))
 )
 
@@ -23,7 +23,7 @@
 
 (defrule update-proglangs
 	?r <- (proglang
-					(if  ?first-ask-if is ?val $?rest-of-ifs-true)
+					(if ?first-ask-if is ?val $?rest-of-ifs-true)
 				)
 				(answer
 					(value ?val)
@@ -70,7 +70,7 @@
 
 (defrule update-question-rules
 	?r <- (question-rule
-					(if  ?first-ask-if is ?val $?rest-of-ifs-true)
+					(if ?first-ask-if is ?val $?rest-of-ifs-true)
 				)
 				(answer
 					(value ?val)
@@ -85,8 +85,8 @@
 )
 
 (defrule update-questions
-	?r <- (question-rule (if $?a&:(=(length$ ?a) 0))  (then ?f))
-	?q <- (question  (id ?f) (is-hidden yes) )
+	?r <- (question-rule (if $?a&:(=(length$ ?a) 0)) (then ?f))
+	?q <- (question (id ?f) (is-hidden yes) )
 		(not (answer (id ?f)))
 	=>
 		(modify ?q (is-hidden no))
