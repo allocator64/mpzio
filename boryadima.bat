@@ -53,13 +53,14 @@
 )
 
 (defrule update-question-rules
-	?r <- (question-rule
-					(if ?first-ask-if is ?val $?rest-of-ifs-true)
-				)
-				(answer
-					(value ?val)
-					(id ?f&:(eq ?f ?first-ask-if))
-				)
+	?r <-
+		(question-rule
+			(if ?first-ask-if is ?val $?rest-of-ifs-true)
+		)
+		(answer
+			(value ?val)
+			(id ?f&:(eq ?f ?first-ask-if))
+		)
 	=>
 		(if (eq (nth$ 1 ?rest-of-ifs-true) and)
 			then (modify ?r (if (rest$ ?rest-of-ifs-true)))
