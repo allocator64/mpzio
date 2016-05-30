@@ -27,13 +27,14 @@
 )
 
 (defrule update-proglangs
-	?r <- (proglang
-					(if ?first-ask-if is ?val $?rest-of-ifs-true)
-				)
-				(answer
-					(value ?val)
-					(id ?f&:(eq ?f ?first-ask-if))
-				)
+	?r <-
+		(proglang
+			(if ?first-ask-if is ?val $?rest-of-ifs-true)
+		)
+		(answer
+			(value ?val)
+			(id ?f&:(eq ?f ?first-ask-if))
+		)
 	=>
 		(if (eq (nth$ 1 ?rest-of-ifs-true) and)
 			then (modify ?r (if (rest$ ?rest-of-ifs-true)))
@@ -43,11 +44,12 @@
 )
 
 (defrule print-proglang
-	?r <- (proglang
-					(if $?a&:(=(length$ ?a) 0))
-					(name ?name)
-					(description ?description)
-				)
+	?r <-
+		(proglang
+			(if $?a&:(=(length$ ?a) 0))
+			(name ?name)
+			(description ?description)
+		)
 	=>
 		(printout t ?name crlf ?description crlf)
 )
@@ -70,11 +72,22 @@
 )
 
 (defrule update-questions
-	?r <- (question-rule (if $?a&:(=(length$ ?a) 0)) (then ?f))
-	?q <- (question (id ?f) (is-hidden yes) )
+	?r <-
+		(question-rule
+			(if $?a&:(=(length$ ?a) 0))
+			(then ?f)
+		)
+	?q <-
+		(question
+			(id ?f)
+			(is-hidden yes)
+		)
 		(not (answer (id ?f)))
 	=>
-		(modify ?q (is-hidden no))
+		(modify
+			?q
+			(is-hidden no)
+		)
 )
 
 (deffunction do-ask
