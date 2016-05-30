@@ -52,22 +52,6 @@
 		(printout t ?name crlf ?description crlf)
 )
 
-(deffunction do-ask
-	(?question ?choices)
-	(printout t ?question " " ?choices " : ")
-	(bind ?answer (read) )
-	(while (not (member$ ?answer ?choices)) do
-		(printout t "Нету такого варианта! Пожалуйста, выберите из списка " ?choices " : " )
-		(bind ?answer (read))
-		(if (lexemep ?answer)
-			then (bind ?answer (lowcase ?answer))
-		)
-	)
-	(printout t crlf)
-	?answer
- )
-
-
 (defrule update-question-rules
 	?r <- (question-rule
 					(if ?first-ask-if is ?val $?rest-of-ifs-true)
@@ -90,6 +74,21 @@
 		(not (answer (id ?f)))
 	=>
 		(modify ?q (is-hidden no))
+)
+
+(deffunction do-ask
+	(?question ?choices)
+	(printout t ?question " " ?choices " : ")
+	(bind ?answer (read) )
+	(while (not (member$ ?answer ?choices)) do
+		(printout t "Нету такого варианта! Пожалуйста, выберите из списка " ?choices " : " )
+		(bind ?answer (read))
+		(if (lexemep ?answer)
+			then (bind ?answer (lowcase ?answer))
+		)
+	)
+	(printout t crlf)
+	?answer
 )
 
 (defrule ask-question
