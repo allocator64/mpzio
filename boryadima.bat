@@ -4,13 +4,13 @@
 ; набрать (run)
 
 (deftemplate answer
-	(slot question-id  (default none))
+	(slot id  (default none))
 	(slot value (default none))
 )
 
 (deftemplate question
-	(slot question-id (default none))
-	(slot question-to-ask (default none))
+	(slot id (default none))
+	(slot text (default none))
 	(slot is-hidden (type SYMBOL) (default yes))
 	(multislot choices (default yes no))
 )
@@ -27,7 +27,7 @@
 				)
 				(answer
 					(value ?val)
-					(question-id ?f&:(eq ?f ?first-ask-if))
+					(id ?f&:(eq ?f ?first-ask-if))
 				)
 	=>
 		(if (eq (nth$ 1 ?rest-of-ifs-true) and)
@@ -74,7 +74,7 @@
 				)
 				(answer
 					(value ?val)
-					(question-id ?f&:(eq ?f ?first-ask-if))
+					(id ?f&:(eq ?f ?first-ask-if))
 				)
 	=>
 		(if (eq (nth$ 1 ?rest-of-ifs-true) and)
@@ -86,21 +86,21 @@
 
 (defrule update-questions
 	?r <- (question-rule (if $?a&:(=(length$ ?a) 0))  (then ?f))
-	?q <- (question  (question-id ?f) (is-hidden yes) )
-		(not (answer (question-id ?f)))
+	?q <- (question  (id ?f) (is-hidden yes) )
+		(not (answer (id ?f)))
 	=>
 		(modify ?q (is-hidden no))
 )
 
 (defrule ask-question
-	?q <- (question (question-to-ask ?question)
-					(question-id ?question-id)
+	?q <- (question (text ?question)
+					(id ?id)
 					(choices $?choices)
 					(is-hidden no)
 				)
-		(not (answer (question-id ?question-id)))
+		(not (answer (id ?id)))
 	=>
-		(assert (answer (question-id ?question-id)
+		(assert (answer (id ?id)
 										(value (ask ?question ?choices)))
 		)
 )
@@ -108,8 +108,8 @@
 
 (assert
 	(question
-		(question-id purpose)
-		(question-to-ask "Для какой цели выбирается язык программирования?")
+		(id purpose)
+		(text "Для какой цели выбирается язык программирования?")
 		(choices web mobile desktop self-development)
 		(is-hidden no)
 	)
@@ -117,8 +117,8 @@
 
 (assert
 	(question
-		(question-id desktop-type)
-		(question-to-ask "Что вы хотите разработать?")
+		(id desktop-type)
+		(text "Что вы хотите разработать?")
 		(choices game graphics driver science)
 	)
 )
@@ -132,8 +132,8 @@
 
 (assert
 	(question
-		(question-id mobile-platform)
-		(question-to-ask "Выберите мобильную операционную систему")
+		(id mobile-platform)
+		(text "Выберите мобильную операционную систему")
 		(choices android ios windows)
 	)
 )
@@ -147,8 +147,8 @@
 
 (assert
 	(question
-		(question-id desktop-platform)
-		(question-to-ask "Выберите операционную систему")
+		(id desktop-platform)
+		(text "Выберите операционную систему")
 		(choices windows linux osx)
 	)
 )
@@ -169,8 +169,8 @@
 
 (assert
 	(question
-		(question-id show-off)
-		(question-to-ask "Хотите ли выделяться среди других программистов в этой области?")
+		(id show-off)
+		(text "Хотите ли выделяться среди других программистов в этой области?")
 	)
 )
 
@@ -190,8 +190,8 @@
 
 (assert
 	(question
-		(question-id web-specialization)
-		(question-to-ask "Какую часть веб приложения создаете?")
+		(id web-specialization)
+		(text "Какую часть веб приложения создаете?")
 		(choices frontend backend)
 	)
 )
@@ -205,8 +205,8 @@
 
 (assert
 	(question
-		(question-id web-oldscool)
-		(question-to-ask "Вы Столяров?")
+		(id web-oldscool)
+		(text "Вы Столяров?")
 	)
 )
 
@@ -219,8 +219,8 @@
 
 (assert
 	(question
-		(question-id crossplatform)
-		(question-to-ask "Вы хотите создать кросплатформенное решение?")
+		(id crossplatform)
+		(text "Вы хотите создать кросплатформенное решение?")
 	)
 )
 
@@ -233,8 +233,8 @@
 
 (assert
 	(question
-		(question-id highload)
-		(question-to-ask "Будете работать с высокой нагрузкой?")
+		(id highload)
+		(text "Будете работать с высокой нагрузкой?")
 	)
 )
 
@@ -247,8 +247,8 @@
 
 (assert
 	(question
-		(question-id is-web)
-		(question-to-ask "Вы хотите программировать для WEB?")
+		(id is-web)
+		(text "Вы хотите программировать для WEB?")
 	)
 )
 
@@ -261,8 +261,8 @@
 
 (assert
 	(question
-		(question-id is-functional)
-		(question-to-ask "Вы хотите функциональный язык?")
+		(id is-functional)
+		(text "Вы хотите функциональный язык?")
 	)
 )
 
@@ -275,8 +275,8 @@
 
 (assert
 	(question
-		(question-id difficulty)
-		(question-to-ask "Какой вы предпочитаете порог входения?")
+		(id difficulty)
+		(text "Какой вы предпочитаете порог входения?")
 		(choices easy medium hard)
 	)
 )
@@ -325,8 +325,8 @@
 
 (assert
 	(question
-		(question-id science-type)
-		(question-to-ask "Какого вида задачи будут решаться?")
+		(id science-type)
+		(text "Какого вида задачи будут решаться?")
 		(choices computation AI)
 	)
 )
@@ -340,8 +340,8 @@
 
 (assert
 	(question
-		(question-id ai-type)
-		(question-to-ask "Какой областью ИИ вы занимаетесь?")
+		(id ai-type)
+		(text "Какой областью ИИ вы занимаетесь?")
 		(choices ontology expert-system prototyping)
 	)
 )
