@@ -373,6 +373,7 @@
 	(proglang
 		(if purpose is mobile and mobile-platform is android)
 		(name "Java")
+		(description "Для Android можно программировать только на Java.")
 	)
 )
 
@@ -380,6 +381,7 @@
 	(proglang
 		(if purpose is mobile and mobile-platform is ios and show-off is no)
 		(name "Objective-C")
+		(description "Apple предлагает два языка для программирования под iPhone. Objective-C является старым и проверенным.")
 	)
 )
 
@@ -387,6 +389,7 @@
 	(proglang
 		(if purpose is mobile and mobile-platform is ios and show-off is yes)
 		(name "Swift")
+		(description "Apple предлагает два языка для программирования под iPhone. Swift является новым и модным.")
 	)
 )
 
@@ -394,6 +397,7 @@
 	(proglang
 		(if purpose is mobile and mobile-platform is windows)
 		(name "C#")
+		(description "Под Windows Phone можно программировать только на C#.")
 	)
 )
 
@@ -401,6 +405,7 @@
 	(proglang
 		(if purpose is web and web-specialization is frontend and web-oldscool is yes)
 		(name "HTML")
+		(description "Если Вы, как и Андрей Викторович Столяров, хотите гибели Web 2.0, Ваш выбор ограничивается старым и проверенным решением.")
 	)
 )
 
@@ -408,6 +413,7 @@
 	(proglang
 		(if purpose is web and web-specialization is frontend and web-oldscool is no)
 		(name "HTML5 + JavaScript")
+		(description "Современные стартапы разрабатываются исключительно на новейших технологиях.")
 	)
 )
 
@@ -415,6 +421,7 @@
 	(proglang
 		(if purpose is web and web-specialization is backend and highload is yes)
 		(name "C++ + Wt")
+		(description "Высоконагруженные приложения можно разрабатывать только на C/C++. Фреймворк Wt позволяет делать это просто и не больно.")
 	)
 )
 
@@ -422,6 +429,7 @@
 	(proglang
 		(if purpose is web and web-specialization is backend and highload is no and difficulty is easy)
 		(name "PHP")
+		(description "PHP -- простой язык для начинающих, позволяющий даже пятикласснику написать свой сайт.")
 	)
 )
 
@@ -429,6 +437,7 @@
 	(proglang
 		(if purpose is web and web-specialization is backend and highload is no and difficulty is medium)
 		(name "Python")
+		(description "Pyhon -- простой язык для продолжающих, позволяющий даже семикласснику написать свой сайт.")
 	)
 )
 
@@ -436,6 +445,7 @@
 	(proglang
 		(if purpose is web and web-specialization is backend and highload is no and difficulty is hard)
 		(name "Ruby")
+		(description "Ruby -- японская разработка, позволяющая даже девятикласснику написать свой сайт.")
 	)
 )
 
@@ -443,6 +453,7 @@
 	(proglang
 		(if purpose is desktop and desktop-type is driver)
 		(name "Plain C")
+		(description "Драйверы для всех операционных систем пишутся только на Си.")
 	)
 )
 
@@ -450,20 +461,23 @@
 	(proglang
 		(if purpose is desktop and desktop-type is game and desktop-platform is windows)
 		(name "C++ + DirectX")
+		(description "Игры разрабатываются на C++ из-за требований к производительности. DirectX позволяет использовать все преимущества графических карт на Windows.")
 	)
 )
 
 (assert
 	(proglang
 		(if purpose is desktop and desktop-type is game and desktop-platform is linux)
-		(name "C++ + SDL")
+		(name "C++ + OpenGL")
+		(description "Игры разрабатываются на C++ из-за требований к производительности. OpenGL позволяет использовать некоторые преимущества графических карт на Linux.")
 	)
 )
 
 (assert
 	(proglang
 		(if purpose is desktop and desktop-type is game and desktop-platform is osx)
-		(name "Objective-C + Cocoa")
+		(name "Objective-C + OpenGL")
+		(description "Приложения для Mac можно разрабатывать только на Objective-C. OpenGL позволяет использовать некоторые преимущества графических карт на Linux.")
 	)
 )
 
@@ -471,20 +485,23 @@
 	(proglang
 		(if purpose is desktop and desktop-type is graphics and crossplatform is yes and difficulty is easy)
 		(name "Java")
+		(description "Java -- язык, на котором миллионы индусов программируют кросплатформенные приложения.")
 	)
 )
 
 (assert
 	(proglang
 		(if purpose is desktop and desktop-type is graphics and crossplatform is yes and difficulty is medium)
-		(name "Python + QT")
+		(name "Python + Qt")
+		(description "Python -- простой язык, а Qt -- кросплатформенный фреймворк.")
 	)
 )
 
 (assert
 	(proglang
 		(if purpose is desktop and desktop-type is graphics and crossplatform is yes and difficulty is hard)
-		(name "C++ + QT")
+		(name "C++ + Qt")
+		(description "C++ -- сложный язык, а Qt -- кросплатформенный фреймворк.")
 	)
 )
 
@@ -492,34 +509,39 @@
 	(proglang
 		(if purpose is desktop and desktop-type is graphics and crossplatform is no and desktop-platform is windows)
 		(name "C#")
+		(description "Начиная с 2007 года, программы под Windows принято писать на C#.")
 	)
 )
 
 (assert
 	(proglang
 		(if purpose is desktop and desktop-type is graphics and crossplatform is no and desktop-platform is osx and difficulty is easy)
-		(name "Python + QT")
+		(name "Python + Qt")
+		(description "Python -- простой язык, а Qt -- кросплатформенный фреймворк.")
 	)
 )
 
 (assert
 	(proglang
 		(if purpose is desktop and desktop-type is graphics and crossplatform is no and desktop-platform is linux and difficulty is easy)
-		(name "Python + QT")
+		(name "Python + Qt")
+		(description "Python -- простой язык, а Qt -- кросплатформенный фреймворк.")
 	)
 )
 
 (assert
 	(proglang
 		(if purpose is desktop and desktop-type is graphics and crossplatform is no and desktop-platform is osx and difficulty is medium)
-		(name "C++ + QT")
+		(name "C++ + Qt")
+		(description "C++ -- сложный язык, а Qt -- кросплатформенный фреймворк, на котором просто писать некросплатформенный код.")
 	)
 )
 
 (assert
 	(proglang
 		(if purpose is desktop and desktop-type is graphics and crossplatform is no and desktop-platform is linux and difficulty is medium)
-		(name "C++ + QT")
+		(name "C++ + Qt")
+		(description "C++ -- сложный язык, а Qt -- кросплатформенный фреймворк, на котором просто писать некросплатформенный код.")
 	)
 )
 
@@ -527,13 +549,15 @@
 	(proglang
 		(if purpose is desktop and desktop-type is graphics and crossplatform is no and desktop-platform is osx and difficulty is hard)
 		(name "Objective-C")
+		(description "Максимальные возможности макбука можно получить только программируя на Objective-C.")
 	)
 )
 
 (assert
 	(proglang
 		(if purpose is desktop and desktop-type is graphics and crossplatform is no and desktop-platform is linux and difficulty is hard)
-		(name "C++ + GTK")
+		(name "Plain C + GTK")
+		(description "Все старые и некрасивые программы под Linux написаны на Си с использованием фреймворка GTK, но работают лучше и быстрее всех.")
 	)
 )
 
@@ -541,6 +565,7 @@
 	(proglang
 		(if purpose is science and science-type is computation and difficulty is easy)
 		(name "Python + NumPy")
+		(description "Python -- простой и медленный язык, NumPy делает математические вычисления немного быстрее.")
 	)
 )
 
@@ -548,6 +573,7 @@
 	(proglang
 		(if purpose is science and science-type is computation and difficulty is medium)
 		(name "C++")
+		(description "C++ -- лучший язык для быстрых вычислений.")
 	)
 )
 
@@ -555,6 +581,7 @@
 	(proglang
 		(if purpose is science and science-type is computation and difficulty is hard)
 		(name "C++ + OpenMP")
+		(description "C++ -- лучший язык для быстрых вычислений, а библиотека OpenMP позволяет вычислять сразу на кластере из машин.")
 	)
 )
 
@@ -562,6 +589,7 @@
 	(proglang
 		(if purpose is science and science-type is AI and ai-type is ontology)
 		(name "Protege")
+		(description "Каждый магистр АЯ знает, что лучший выбор языка для создания онтологии -- это Protege!")
 	)
 )
 
@@ -569,6 +597,7 @@
 	(proglang
 		(if purpose is science and science-type is AI and ai-type is expert-system)
 		(name "CLIPS")
+		(description "Каждый магистр АЯ знает, что лучший выбор языка для создания ЭС -- это CLIPS!")
 	)
 )
 
@@ -576,6 +605,7 @@
 	(proglang
 		(if purpose is science and science-type is AI and ai-type is prototyping)
 		(name "ПЛЭНЕР")
+		(description "Каждый бакалавр АЯ знает, что лучший выбор языка для прототипирования и перебора -- это ПЛЭНЕР!")
 	)
 )
 
@@ -583,6 +613,7 @@
 	(proglang
 		(if purpose is self-development and difficulty is easy)
 		(name "Pascal")
+		(description "Pascal -- простой язык, который научит вас понимать основные принципы императивного программирования и алгоритмов.")
 	)
 )
 
@@ -590,6 +621,7 @@
 	(proglang
 		(if purpose is self-development and difficulty is medium and is-web is no)
 		(name "C++")
+		(description "C++ -- язык, который нужно знать каждому.")
 	)
 )
 
@@ -597,6 +629,7 @@
 	(proglang
 		(if purpose is self-development and difficulty is medium and is-web is yes)
 		(name "Python")
+		(description "Стартапы пишутся на языке Python.")
 	)
 )
 
@@ -604,6 +637,7 @@
 	(proglang
 		(if purpose is self-development and difficulty is hard and is-functional is yes and show-off is no)
 		(name "Lisp")
+		(description "Классический вариант для понимания принципов функционального программирования.")
 	)
 )
 
@@ -611,6 +645,7 @@
 	(proglang
 		(if purpose is self-development and difficulty is hard and is-functional is yes and show-off is yes)
 		(name "Haskell")
+		(description "Скорее всего, вы ничего не поймёте, но сможете участвовать в дискуссиях о монадах.")
 	)
 )
 
@@ -618,6 +653,7 @@
 	(proglang
 		(if purpose is self-development and difficulty is hard and is-functional is no and show-off is no)
 		(name "Совершенствоваться в C++")
+		(description "Язык С++ позволяет и его новые стандарты позволяют почти всегда найти для себя что-то новое.")
 	)
 )
 
@@ -625,6 +661,7 @@
 	(proglang
 		(if purpose is self-development and difficulty is hard and is-functional is no and show-off is yes)
 		(name "Perl")
+		(description "Perl -- язык, корректные программы на котором выглядят как случайные последовательности служебных символов.")
 	)
 )
 
