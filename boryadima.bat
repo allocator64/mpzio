@@ -3,11 +3,6 @@
 ; открыть там этот файл
 ; набрать (run)
 
-(deftemplate answer
-	(slot id (default none))
-	(slot value (default none))
-)
-
 (deftemplate question
 	(slot id (default none))
 	(slot text (default none))
@@ -19,6 +14,16 @@
 	(multislot if)
 	(slot name)
 	(slot description (default ""))
+)
+
+(deftemplate question-rule
+	(multislot if (default none))
+	(slot then (default none))
+)
+
+(deftemplate answer
+	(slot id (default none))
+	(slot value (default none))
 )
 
 (defrule update-proglangs
@@ -47,7 +52,7 @@
 		(printout t ?name crlf ?description crlf)
 )
 
-(deffunction ask
+(deffunction do-ask
 	(?question ?choices)
 	(printout t ?question " " ?choices " : ")
 	(bind ?answer (read) )
@@ -62,11 +67,6 @@
 	?answer
  )
 
-
-(deftemplate question-rule
-	(multislot if (default none))
-	(slot then (default none))
-)
 
 (defrule update-question-rules
 	?r <- (question-rule
@@ -101,7 +101,7 @@
 		(not (answer (id ?id)))
 	=>
 		(assert (answer (id ?id)
-										(value (ask ?question ?choices)))
+										(value (do-ask ?question ?choices)))
 		)
 )
 
