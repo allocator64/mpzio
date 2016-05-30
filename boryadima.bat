@@ -12,7 +12,7 @@
 (deftemplate question
 	(slot question-id (default none))
 	(slot question-to-ask (default none))
-	(slot has-pre-condition (type SYMBOL) (default yes))
+	(slot is-hidden (type SYMBOL) (default yes))
 	(multislot choices (default yes no))
 )
 
@@ -93,10 +93,10 @@
 
 (defrule set-pre-condition-when-no-antecedents
 	?r <- (question-rule (if $?a&:(=(length$ ?a) 0))  (then-ask-question ?f))
-	?q <- (question  (question-id ?f) (has-pre-condition yes) )
+	?q <- (question  (question-id ?f) (is-hidden yes) )
 		(not (answer (question-id ?f)))
 	=>
-		(modify ?q (has-pre-condition no))
+		(modify ?q (is-hidden no))
 )
 
 
@@ -105,7 +105,7 @@
 	?q <- (question (question-to-ask ?question)
 					(question-id ?question-id)
 					(choices $?choices)
-					(has-pre-condition no)
+					(is-hidden no)
 				)
 		(not (answer (question-id ?question-id)))
 	=>
@@ -121,7 +121,7 @@
 		(question-id purpose)
 		(question-to-ask "Для какой цели выбирается язык программирования?")
 		(choices web mobile desktop self-development)
-		(has-pre-condition no)
+		(is-hidden no)
 	)
 )
 
