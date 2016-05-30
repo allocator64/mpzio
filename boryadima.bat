@@ -92,15 +92,17 @@
 )
 
 (defrule ask-question
-	?q <- (question (text ?question)
-					(id ?id)
-					(choices $?choices)
-					(is-hidden no)
-				)
+	?q <-
+		(question
+			(text ?question)
+			(id ?id)
+			(choices $?choices)
+			(is-hidden no)
+		)
 		(not (answer (id ?id)))
 	=>
 		(assert (answer (id ?id)
-										(value (do-ask ?question ?choices)))
+			(value (do-ask ?question ?choices)))
 		)
 )
 
