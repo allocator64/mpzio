@@ -97,7 +97,7 @@
 	(printout t ?question " " ?choices " : ")
 	(bind ?answer (read) )
 	(while (not (member$ ?answer ?choices)) do
-		(printout t "Нету такого варианта! Пожалуйста, выберите из списка " ?choices " : " )
+		(printout t "Нет такого варианта, пожалуйста, выберите из списка " ?choices " : " )
 		(bind ?answer (read))
 		(if (lexemep ?answer)
 			then (bind ?answer (lowcase ?answer))
@@ -565,7 +565,7 @@
 
 (assert
 	(proglang
-		(if purpose is science and science-type is computation and difficulty is easy)
+		(if purpose is desktop and desktop-type is science and science-type is computation and difficulty is easy)
 		(name "Python + NumPy")
 		(description "Python -- простой и медленный язык, NumPy делает математические вычисления немного быстрее.")
 	)
@@ -573,7 +573,7 @@
 
 (assert
 	(proglang
-		(if purpose is science and science-type is computation and difficulty is medium)
+		(if purpose is desktop and desktop-type is science and science-type is computation and difficulty is medium)
 		(name "C++")
 		(description "C++ -- лучший язык для быстрых вычислений.")
 	)
@@ -581,7 +581,7 @@
 
 (assert
 	(proglang
-		(if purpose is science and science-type is computation and difficulty is hard)
+		(if purpose is desktop and desktop-type is science and science-type is computation and difficulty is hard)
 		(name "C++ + OpenMP")
 		(description "C++ -- лучший язык для быстрых вычислений, а библиотека OpenMP позволяет вычислять сразу на кластере из машин.")
 	)
@@ -589,7 +589,7 @@
 
 (assert
 	(proglang
-		(if purpose is science and science-type is AI and ai-type is ontology)
+		(if purpose is desktop and desktop-type is science and science-type is AI and ai-type is ontology)
 		(name "Protege")
 		(description "Каждый магистр АЯ знает, что лучший выбор языка для создания онтологии -- это Protege!")
 	)
@@ -597,7 +597,7 @@
 
 (assert
 	(proglang
-		(if purpose is science and science-type is AI and ai-type is expert-system)
+		(if purpose is desktop and desktop-type is science and science-type is AI and ai-type is expert-system)
 		(name "CLIPS")
 		(description "Каждый магистр АЯ знает, что лучший выбор языка для создания ЭС -- это CLIPS!")
 	)
@@ -605,7 +605,7 @@
 
 (assert
 	(proglang
-		(if purpose is science and science-type is AI and ai-type is prototyping)
+		(if purpose is desktop and desktop-type is science and science-type is AI and ai-type is prototyping)
 		(name "ПЛЭНЕР")
 		(description "Каждый бакалавр АЯ знает, что лучший выбор языка для прототипирования и перебора -- это ПЛЭНЕР!")
 	)
@@ -655,7 +655,7 @@
 	(proglang
 		(if purpose is self-development and difficulty is hard and is-functional is no and show-off is no)
 		(name "Совершенствоваться в C++")
-		(description "Язык С++ позволяет и его новые стандарты позволяют почти всегда найти для себя что-то новое.")
+		(description "Язык С++ и его новые стандарты позволяют почти всегда найти для себя что-то новое.")
 	)
 )
 
@@ -666,5 +666,3 @@
 		(description "Perl -- язык, корректные программы на котором выглядят как случайные последовательности служебных символов.")
 	)
 )
-
-(clear-window)
