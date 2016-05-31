@@ -2,6 +2,8 @@
 ; нажать cmd+shift+L
 ; открыть там этот файл
 ; набрать (run)
+; Или
+; (echo -e '(batch boryadima.bat)\n(run)'; cat - ; echo '(exit)') | /Applications/CLIPS\ Console
 
 (deftemplate question
 	(slot id (default none))
